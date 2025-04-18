@@ -6,7 +6,7 @@ export async function action({ request }: Route.ActionArgs) {
 
 }
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-
+    console.log("igi")
 }
 
 function GlobalLayout() {
@@ -14,8 +14,8 @@ function GlobalLayout() {
 
     return (
         <div className='flex flex-col h-screen' >
-            <header className='bg-slate-900 opacity-[97%]  text-white p-2 sticky top-0 shadow shadow-white'>
-                <div className='mx-auto flex gap-4 items-center w-full '>
+            <header className='bg-primary opacity-[97%]  text-primary-foreground p-2 sticky top-0 shadow shadow-white'>
+                <div className='max-w-6xl mx-auto flex gap-4 items-center w-full '>
                     <Link className='' to={'/'}><h1>Amaz</h1></Link>
                     <button>Liste de page </button>
                     <Form method='get' className='bg-white text-black placeholder:text-black border-none rounded-full w-full ' >
@@ -33,7 +33,7 @@ function GlobalLayout() {
                 <Outlet />
             </main>
 
-            <footer className=' text-white bg-white mt-auto'>
+            <footer className='h-20 bg-primary mt-auto' id='footer'>
                 az
             </footer>
         </div>

@@ -20,7 +20,6 @@ export const meta = ({ data }: Route.MetaArgs) => {
             content: description
         }
     ]
-
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -39,8 +38,8 @@ export default function Product({ loaderData }: Route.ComponentProps) {
     const isAvailable = product.stock > 0
 
     return (
-        <div className="container mx-auto space-y-4">
-            <div className="flex justify-between gap-4  mx-auto">
+        <div className={`container mx-auto space-y-4 `}>
+            <div className="flex justify-between gap-4   mx-auto">
                 <div className=" w-full space-y-4">
                     <div className="rounded">
                         <div className="max-w-[300px] mx-auto overflow-hidden ">

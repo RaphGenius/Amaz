@@ -15,13 +15,20 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export const loader = async () => {
-  const data = await getProducts()
-  return { data }
+export const action = async () => {
+  console.log("action products")
 }
 
-export default function Products({ loaderData }: Route.ComponentProps) {
-  const { data } = loaderData
+export const loader = async ({ request }: Route.LoaderArgs) => {
+  console.log("loader products")
+  const url = new URL(request.url);
+  const search = url.searchParams.get("search")
+  const data = await getProducts({ search })
+  return { data, search }
+}
+
+export default function Products({ loaderData, params }: Route.ComponentProps) {
+  const { data, search } = loaderData
   const [currentLayout, setCurrentLayout] = useState<ProductLayout>("card");
 
   const layout: Record<ProductLayout, string> = {
@@ -29,8 +36,7 @@ export default function Products({ loaderData }: Route.ComponentProps) {
     list: "flex flex-col gap-4"
   }
 
-
-  return <div className="mx-auto w-full max-w-6xl mt-4 flex">
+  return <div className="mx-auto h-full w-full max-w-6xl mt-4 flex">
     <div className="w-[300px] hidden md:block bg-primary text-primary-foreground rounded-e  p-4">
       FILTRE
     </div>
@@ -44,12 +50,16 @@ export default function Products({ loaderData }: Route.ComponentProps) {
           List
         </button>
       </div>
+      {
+        data.products.length < 1
+          ? <div>No product founded with search {search}</div>
+          : <div className={`${layout[currentLayout]} w-full`}>
+            {
+              data.products.map((product) => <ProductItemDisplay key={product.id} product={product} layout={currentLayout} />)
+            }
+          </div>
 
-      <div className={`${layout[currentLayout]} w-full`}>
-        {
-          data.products.map((product) => <ProductItemDisplay key={product.id} product={product} layout={currentLayout} />)
-        }
-      </div>
+      }
     </div>
   </div>
 }

@@ -13,10 +13,10 @@ function ProductItemCard({ product }: Props) {
         <div className=' rounded group overflow-hidden min-h-[200px] w-full  shadow-white'>
             <Link to={`/product/${product.id}`}>
                 <div className='h-[150px] w-full'>
-                    <img src={product.thumbnail} alt={`${product.title} picture`} className='object-scale-down w-full h-full' />
+                    <img src={product.thumbnail} alt={`${product.title} picture`} className='object-scale-down w-full h-full group-hover:scale-105 transition-transform' />
                 </div>
             </Link>
-            <div className='h-full bg-primary text-primary-foreground  p-2 line-clamp-1 flex flex-col'>
+            <div className='h-full bg-primary-foreground text-primary  p-2 line-clamp-1 flex flex-col'>
                 <div>
                     <Link to={`/product/${product.id}`}>
                         <h2 className='text-sm hover:underline font-mono'>{product.title} </h2>

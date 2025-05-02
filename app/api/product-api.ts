@@ -3,8 +3,13 @@ import type { Product } from "~/types/product";
 
 const baseUrl = 'https://dummyjson.com/products'
 
-const getProducts = async () => {
-    const response = await fetch(`${baseUrl}?limit=12`, {
+interface GetProductsParams {
+    search: string | null
+}
+
+const getProducts = async ({ search }: GetProductsParams) => {
+    const searchProductUrl = search ? baseUrl + `/search?q=${search}` : baseUrl
+    const response = await fetch(`${searchProductUrl}`, {
         headers: {
             "content-type": "application/json"
         }
